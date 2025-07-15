@@ -26,7 +26,7 @@ CUSTOM_MODEL="deepseek-ai/DeepSeek-R1-Distill-Qwen-7B"
 # FIREWORKS_KEY="YOUR_KEY"
 ```
 
-You will need to replace the `<REPLACE WITH IP ADDRESS>` tag. If you want to change the model, which is currently `deepseek-ai/DeepSeek-R1-Distill-Qwen-7B`, you have to do it in both [vllm-startup](https://github.com/arichadda/vllm-startup) `docker-compose.yml` and the `.env.local` (they will need to be the same). The easiest way to pull in models to serve using [vLLM](https://github.com/vllm-project/vllm) is using [HuggingFace Hub](https://huggingface.co/models). Happy to answer any questions not related to the original implementations via PRs or Issues. 
+You will need to replace the `<REPLACE WITH IP ADDRESS>` tag. If you want to change the model, which is currently `deepseek-ai/DeepSeek-R1-Distill-Qwen-7B`, you have to do it in both [vllm-startup](https://github.com/arichadda/vllm-startup) `docker-compose.yml` and the `.env.local` (they will need to be the same). The easiest way to pull in models to serve using [vLLM](https://github.com/vllm-project/vllm) is using [HuggingFace Hub](https://huggingface.co/models). There are also some additional flags set in  [vllm-startup](https://github.com/arichadda/vllm-startup) `docker-compose.yml` that you may want to change based on your hardware configuration. Happy to answer any questions not related to the original implementations via PRs or Issues. 
 
 
 ---
