@@ -1,5 +1,36 @@
 # Open Deep Research
 
+This project is forked from [here](https://github.com/dzhng/deep-research), where I wanted to run it locally instead of using one of the external model providers. Below are the instructions to run it locally and the original `README.md` falls after the line break. 
+
+1. Clone the following: https://github.com/arichadda/deep-research-local-tsx; https://github.com/mendableai/firecrawl; and https://github.com/arichadda/vllm-startup
+2. Run `docker compose -f firecrawl/docker-compose.yaml -f vllm-startup/docker-compose.yml up --build -d` from the root where all three directories are cloned. The vllm container takes a bit, so check the logs till it gives you a set of available routes, meaning it's done.
+3. Then `cd deep-research-local-tsx`, edit `.env.local` with the appropriate IPs, and run `docker compose up --build -d`
+4. Launch an interactive research session with `docker exec -it deep-research npm run docker` and follow the prompts from there.
+
+You will need to create an `.env.local` file that should look something like this: 
+
+```bash
+# FIRECRAWL_KEY="YOUR_KEY"
+# If you want to use your self-hosted Firecrawl, add the following below:
+FIRECRAWL_BASE_URL="http://<REPLACE WITH IP ADDRESS>:3002"
+FIRECRAWL_CONCURRENCY="2"
+
+OPENAI_KEY="VLLM"
+CONTEXT_SIZE="10000"
+
+# If you want to use other OpenAI compatible API, add the following below:
+OPENAI_ENDPOINT="http://<REPLACE WITH IP ADDRESS>:8000/v1"
+CUSTOM_MODEL="deepseek-ai/DeepSeek-R1-Distill-Qwen-7B"
+
+# If you want to use fireworks.ai's DeepSeek R1 model:
+# FIREWORKS_KEY="YOUR_KEY"
+```
+
+You will need to replace the `<REPLACE WITH IP ADDRESS>` tag. If you want to change the model, which is currently `deepseek-ai/DeepSeek-R1-Distill-Qwen-7B`, you have to do it in both [vllm-startup](https://github.com/arichadda/vllm-startup) `docker-compose.yml` and the `.env.local` (they will need to be the same). The easiest way to pull in models to serve using [vLLM](https://github.com/vllm-project/vllm) is using [HuggingFace Hub](https://huggingface.co/models). Happy to answer any questions not related to the original implementations via PRs or Issues. 
+
+
+---
+
 An AI-powered research assistant that performs iterative, deep research on any topic by combining search engines, web scraping, and large language models.
 
 The goal of this repo is to provide the simplest implementation of a deep research agent - e.g. an agent that can refine its research direction over time and deep dive into a topic. Goal is to keep the repo size at <500 LoC so it is easy to understand and build on top of.
